@@ -1,0 +1,35 @@
+.headerWrapper {
+  background-color: rgb(25, 27, 31);
+  box-shadow: rgb(0 0 0 / 12%) 0px 1px 3px, rgb(0 0 0 / 24%) 0px 1px 2px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+}
+.headerContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  a {
+    text-decoration: none;
+  }
+
+  .headerLogo {
+    color: white;
+    font-size: 20px;
+  }
+
+  .navLinks {
+    display: flex;
+
+    .navItem {
+      &.active {
+        border-radius: 12px;
+        background-color: rgb(44, 47, 54);
+      }
+      color: rgb(255, 255, 255);
+      padding: 8px 12px;
+      margin-right: 10px;
+    }
+  }
+}

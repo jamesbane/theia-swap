@@ -1,26 +1,33 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Layout from "./components/Layout";
+import Router from "./routes";
+import {BrowserRouter} from "react-router-dom";
+import './styles/common.scss'
+import 'bootstrap/dist/css/bootstrap.css'
+import {createWeb3ReactRoot, Web3ReactProvider} from '@web3-react/core';
+import {ethers} from "ethers";
+import {ExternalProvider, JsonRpcFetchFunc} from "@ethersproject/providers/src.ts/web3-provider";
+
+function getLibrary(provider: ExternalProvider | JsonRpcFetchFunc) {
+    const library = new ethers.providers.Web3Provider(provider)
+    library.pollingInterval = 10000
+    return library
+}
+
+const Web3ProviderNetwork = createWeb3ReactRoot('NETWORK')
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <Web3ReactProvider getLibrary={getLibrary}>
+            <Web3ProviderNetwork getLibrary={getLibrary}>
+                <BrowserRouter>
+                    <Layout>
+                        <Router/>
+                    </Layout>
+                </BrowserRouter>
+            </Web3ProviderNetwork>
+        </Web3ReactProvider>
+    );
 }
 
 export default App;
